@@ -1,0 +1,75 @@
+\documentclass{article}
+
+\usepackage{cmap}  % should be before fontenc
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[pdftex,colorlinks=true,linkcolor=blue,urlcolor=red,unicode=true,hyperfootnotes=false,bookmarksnumbered]{hyperref}
+\usepackage{indentfirst}
+
+% так можно определять команду для повторяющихся обозначений,
+% чтобы не набирать каждый раз заново
+\newcommand{\E}{\ensuremath{\mathsf{E}}}  % матожидание
+\newcommand{\D}{\ensuremath{\mathsf{D}}}  % дисперсия
+\newcommand{\Prb}{\ensuremath{\mathsf{P}}}  % вероятностная мера
+
+\newcommand{\eps}{\varepsilon}  % нормальная буква эпсилон
+\renewcommand{\phi}{\varphi}  % нормальная буква фи
+
+\renewcommand{\le}{\leqslant}  % нормальный знак <=
+\renewcommand{\leq}{\leqslant}  % нормальный знак <=
+\renewcommand{\ge}{\geqslant}  % нормальный знак >=
+\renewcommand{\geq}{\geqslant}  % нормальный знак >=
+
+\newtheorem{lemma}{Лемма}  % создаёт команд для лемм, можно сделать так же для любого другого вида утверждений
+
+\pagestyle{myheadings}
+\markright{Iaroslav Khripkov\hfill}  % <- здесь нужно подставить свои имя и фамилию
+
+\begin{document}
+
+\section*{2.1}
+
+\subsection*{problem statement}
+A robot uses a range sensor that can measure ranges from 0m and 3m. For simplicity, assume that the actual ranges are distributed uniformly in this interval. Unfortunately, the sensor can be faulty. When the sensor is faulty, it constantly outputs a range below 1m, regardless of the actual range in the sensor's measurement cone. We know that the prior probability for a sensor to be faulty is  $p=0.01$ .
+Suppose the robot queried it's sensor N times, and every single time the measurement value is below 1m. What is the posterior probability of a sensor fault, for  $N=1,2,\dots,10$ . Formulate the corresponding probabilistic model.
+\subsection*{solution}
+Let's describe PDF of prior distributions:
+$$ p_{gt}(x) = U(0,3) $$
+Therefore observation probability density function consists of two mutually exclusive events: sensor is faulty and it's probability = 0.01, and when sensor is working properly and actual distance is less than 1m. 
+It implies the following equation for PDF of observed distance:
+$$ p_{obs}(x) = 0.99*p_{gt}(x) + 0.01 * I[x<1m]$$
+
+\subsubsection*{N=1}
+
+Let's define several events:
+
+
+\textbf{A - sensor is faulty}
+
+
+\textbf{B - observed distance is less than 1m}
+
+
+Now let's define the probability of sensor fault when observed distance < 1m
+For this task we will use Bayes theorem
+$$ P(A) = 0.01 \texttt{ (from the statement)}$$
+$$ P(B) = P_{obs}(X<1) = 0.99 * \frac{1}{3} + 0.01 = 0.34 $$
+
+
+$P(B|A) = 1$ (since the faulty sensor always "measures" distance less than 1 meter)
+
+
+So, $P(A|B)=\frac{P(B|A)P(A)}{P(B)} = \frac{1 * 0.01}{0.34} = 0.0294$
+
+
+\subsubsection*{N measurements}
+
+In this case our P(A) and P(B|A) are the same as in the first part. But here is what happening to our P(B). Now we measured <1m N times and calculating the probability of it or sensor was faulty. 
+$$ P(B) = 0.99 * (\frac{1}{3})^{N} + 0.01 $$
+
+Final formula now looks like this:
+$$P(A|B)=\frac{P(B|A)P(A)}{P(B)} = \frac{0.01}{0.99 (\frac{1}{3})^{N} + 0.01}$$
+\end{document}
+
