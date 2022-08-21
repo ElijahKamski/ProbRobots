@@ -349,26 +349,34 @@ $$P(x_2|z_2=sunny, x_1=sunny) =\eta \begin{pmatrix}
 \textbf{N=3}
 $$P(x_3|z_{2:3}, x_1) =  \eta P(z_3|x_3,z_2)P(x_3|x_1,z_2) = \eta P(z_3|x_3)P(x_3|x_1,z_2) $$
 $$= \eta P(z_3|x_3) \sum_{x_2}P(x_3|x_2) P(x_2|x_1,z_2) =\eta P(z_3|x_3)\cdot
-\begin{pmatrix}
+(\begin{pmatrix}
 0.8 & 0.2 & 0 \\
 0.4 & 0.4 & 0.2 \\
 0.2 & 0.6 & 0.2
-\end{pmatrix} \times  \begin{pmatrix}
-8/9 \\ 1/9 \\ 0
-\end{pmatrix} $$
+\end{pmatrix}^T \times  \begin{pmatrix}
+8 \\ 1 \\ 0
+\end{pmatrix}) $$
 
-
-$$P(x_2|z_2=sunny, x_1=sunny) =\eta \begin{pmatrix}
-0.6 \\
- 0.4 \\ 
- 0
-\end{pmatrix} \cdot \begin{pmatrix}
-0.8 \\ 0.2 \\ 0
+$$ = \eta P(z_3|x_3) \cdot \begin{pmatrix}
+68/10 \\ 20/10 \\ 2/10
 \end{pmatrix} = \eta \begin{pmatrix}
-0.48 \\ 0.08 \\0
-\end{pmatrix}  = \begin{pmatrix}
-8/9 \\ 1/9 \\ 0
-\end{pmatrix} $$
+6/10 \\ 3/10 \\0
+\end{pmatrix} \cdot \begin{pmatrix}
+408/100 \\ 60/100 \\ 0
+\end{pmatrix}  = \eta \begin{pmatrix}
+102/117 \\ 15/117 \\ 0
+\end{pmatrix}  = \begin{pmatrix} 11/14 \\ 3/14 \\ 0 \end{pmatrix} $$
+\textbf{N=4}
+$$P(x_4|z_{2:4}, x_1) =  \eta P(z_4|x_4,z_{2:3})P(x_4|x_1,z_{2:3}) = \eta P(z_4|x_4)P(x_4|x_1,z_{2:3}) $$
+$$= \eta \begin{pmatrix}
+0 \\ 0 \\ 1 \end{pmatrix} P(x_4|x_1,z_{2:3}) =\eta \begin{pmatrix}
+0 \\ 0 \\ P(x_4=rainy|x_1,z_{2:3}) \end{pmatrix} = \begin{pmatrix}
+0 \\ 0 \\ 1 \end{pmatrix}
+ $$
+ 
+ 
+ \subsubsection{With time machine}
+
 
 \subsection{most likely sequence}
 \end{document}
